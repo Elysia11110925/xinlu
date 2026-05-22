@@ -445,19 +445,19 @@
     <h2 class="section-heading">成果展示</h2>
     <div class="stats">
       <div class="stat">
-        <div class="num counter" data-target="4000">0</div>
-        <div class="label">累计服务人次</div>
-      </div>
-      <div class="stat">
-        <div class="num counter" data-target="600">0</div>
+        <div class="num">600+</div>
         <div class="label">活动次数</div>
       </div>
       <div class="stat">
-        <div class="num counter" data-target="20000">0</div>
+        <div class="num">4000+</div>
+        <div class="label">累计服务人次</div>
+      </div>
+      <div class="stat">
+        <div class="num">20000+</div>
         <div class="label">志愿服务时长（小时）</div>
       </div>
       <div class="stat">
-        <div class="num counter" data-target="20">0</div>
+        <div class="num">20余项</div>
         <div class="label">荣誉奖项</div>
       </div>
     </div>
@@ -515,30 +515,6 @@
       a.classList.toggle('active', a.getAttribute('href') === '#' + current);
     });
   });
-})();
-
-/* ═══════════════ 计数器动画 ═══════════════ */
-(function() {
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.querySelectorAll('.counter').forEach(c => {
-          const t = +c.dataset.target;
-          if (t === 0 || c.dataset.done) return;
-          c.dataset.done = 1;
-          let cur = 0;
-          const step = Math.ceil(t / 30);
-          const iv = setInterval(() => {
-            cur += step;
-            if (cur >= t) { c.textContent = t; clearInterval(iv); }
-            else c.textContent = cur;
-          }, 30);
-        });
-      }
-    });
-  }, { threshold: 0.3 });
-  const sec = document.getElementById('results');
-  if (sec) obs.observe(sec);
 })();
 </script>
 </body>
