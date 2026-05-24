@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数学竞赛复习 —— 高等数学（除微分方程）</title>
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
+<style>
+  :root {
+    --bg: #fdfbf7;
+    --card-bg: #ffffff;
+    --text: #2c2c2c;
+    --accent: #1a5c8a;
+    --accent-light: #e8f0f8;
+    --green: #2d6a3f;
+    --border: #e0dcd5;
+    --shadow: 0 2px 8px rgba(0,0,0,0.06);
+    --code-bg: #f4f2ed;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.85; color: var(--text); background: var(--bg);
+    scroll-behavior: smooth;
+  }
+
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.9rem;
+  }
+  .topbar .logo { font-weight: 700; color: var(--accent); font-size: 1.05rem; }
+  .topbar a { color: var(--accent); text-decoration: none; margin-left: 20px; }
+  .topbar a:hover { text-decoration: underline; }
+
+  .layout {
+    display: flex; max-width: 1200px; margin: 0 auto; gap: 32px;
+    padding: 28px 24px 60px;
+  }
+
+  .sidebar {
+    position: sticky; top: 80px; align-self: flex-start;
+    width: 240px; flex-shrink: 0;
+    max-height: calc(100vh - 120px); overflow-y: auto;
+    background: var(--card-bg); border-radius: 8px;
+    box-shadow: var(--shadow); padding: 20px 18px;
+    font-size: 0.88rem; line-height: 2.0;
+  }
+  .sidebar h3 {
+    font-size: 0.95rem; color: var(--accent);
+    margin-bottom: 10px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent-light);
+  }
+  .sidebar ul { list-style: none; padding: 0; }
+  .sidebar li { margin: 0; }
+  .sidebar a {
+    color: #444; text-decoration: none; display: block;
+    padding: 3px 8px; border-radius: 4px; transition: all 0.15s;
+  }
+  .sidebar a:hover { background: var(--accent-light); color: var(--accent); }
+
+  .content {
+    flex: 1; min-width: 0;
+    background: var(--card-bg); border-radius: 8px;
+    box-shadow: var(--shadow); padding: 40px 48px;
+  }
+
+  h1 {
+    text-align: center; font-size: 1.75rem; color: var(--accent);
+    margin-bottom: 36px; padding-bottom: 16px;
+    border-bottom: 3px double var(--accent);
+  }
+  h2 {
+    font-size: 1.3rem; color: var(--accent);
+    margin-top: 42px; margin-bottom: 18px;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, var(--accent-light) 0%, #f8f6f0 100%);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+  }
+  h3 {
+    font-size: 1.12rem; color: var(--green);
+    margin-top: 30px; margin-bottom: 12px;
+    padding-left: 8px; border-left: 3px solid var(--green);
+  }
+  h4 {
+    font-size: 1.02rem; color: #555;
+    margin-top: 22px; margin-bottom: 8px; font-weight: 600;
+  }
+
+  p { margin: 8px 0 12px; text-align: justify; }
+  ul, ol { padding-left: 22px; margin: 10px 0; }
+  li { margin: 5px 0; }
+  strong { color: #1a1a1a; }
+
+  .section-divider { border: none; border-top: 1px dashed #d8d4cc; margin: 32px 0; }
+
+  .table-wrapper { overflow-x: auto; margin: 18px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+  th, td {
+    border: 1px solid #d0ccc4; padding: 8px 12px; text-align: left;
+  }
+  th {
+    background: linear-gradient(180deg, #e8e4dc, #ddd9cf);
+    font-weight: 700; color: #333;
+  }
+  tbody tr:nth-child(even) td { background: #fafaf7; }
+  tbody tr:hover td { background: #f0eee7; }
+
+  code {
+    background: var(--code-bg); padding: 2px 6px; border-radius: 3px;
+    font-family: "Cascadia Code", "Fira Code", "Consolas", "Courier New", monospace;
+    font-size: 0.88em; color: #c7254e;
+  }
+  pre {
+    background: #2d2d2d; color: #e8e8e8;
+    border-radius: 8px; padding: 16px 20px;
+    overflow-x: auto; margin: 14px 0; line-height: 1.55;
+  }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.85rem; }
+
+  .katex-display { margin: 14px 0; overflow-x: auto; overflow-y: hidden; }
+
+  .back-to-top {
+    position: fixed; bottom: 32px; right: 32px;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 1.3rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    z-index: 200;
+  }
+  .back-to-top.visible { opacity: 1; pointer-events: auto; }
+  .back-to-top:hover { background: #1a3d5c; }
+
+  @media (max-width: 900px) {
+    .layout { flex-direction: column; }
+    .sidebar { position: static; width: 100%; max-height: none; order: -1; }
+    .content { padding: 24px 20px; }
+    .topbar { padding: 10px 16px; font-size: 0.82rem; }
+  }
+
+  @media print {
+    .sidebar, .topbar, .back-to-top { display: none; }
+    .layout { display: block; max-width: none; padding: 0; }
+    .content { box-shadow: none; padding: 0; }
+    body { background: #fff; font-size: 10.5pt; }
+    h2 { page-break-before: always; }
+    h2:first-of-type { page-break-before: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <span class="logo">高等数学竞赛复习</span>
+  <nav>
+    <a href="#top">回到顶部</a>
+    <a href="javascript:window.print()">打印 PDF</a>
+  </nav>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <nav class="toc"><h3>目录</h3><ul><li><a href="#目录">目录</a></li><li><a href="#1-函数、极限与连续">1. 函数、极限与连续</a></li><li><a href="#2-导数与微分">2. 导数与微分</a></li><li><a href="#3-微分中值定理与导数的应用">3. 微分中值定理与导数的应用</a></li><li><a href="#4-不定积分">4. 不定积分</a></li><li><a href="#5-定积分">5. 定积分</a></li><li><a href="#6-定积分的应用">6. 定积分的应用</a></li><li><a href="#7-空间解析几何与向量代数">7. 空间解析几何与向量代数</a></li><li><a href="#8-多元函数微分学">8. 多元函数微分学</a></li><li><a href="#9-重积分">9. 重积分</a></li><li><a href="#10-曲线积分与曲面积分">10. 曲线积分与曲面积分</a></li><li><a href="#11-无穷级数">11. 无穷级数</a></li><li><a href="#附录：竞赛应试技巧">附录：竞赛应试技巧</a></li></ul></nav>
+  </aside>
+  <main class="content">
+<h1 id="top">大学生数学竞赛（校赛）复习指南 —— 高等数学（除微分方程）</h1>
+<hr class="section-divider">
+<h2 id="目录">目录</h2>
+<ul>
+<li>[函数、极限与连续](#1-函数极限与连续)</li>
+<li>[导数与微分](#2-导数与微分)</li>
+<li>[微分中值定理与导数的应用](#3-微分中值定理与导数的应用)</li>
+<li>[不定积分](#4-不定积分)</li>
+<li>[定积分](#5-定积分)</li>
+<li>[定积分的应用](#6-定积分的应用)</li>
+<li>[空间解析几何与向量代数](#7-空间解析几何与向量代数)</li>
+<li>[多元函数微分学](#8-多元函数微分学)</li>
+<li>[重积分](#9-重积分)</li>
+<li>[曲线积分与曲面积分](#10-曲线积分与曲面积分)</li>
+<li>[无穷级数](#11-无穷级数)</li>
+</ul>
+<hr class="section-divider">
+<h2 id="1-函数、极限与连续">1. 函数、极限与连续</h2>
+<h3 id="11-函数">1.1 函数</h3>
+<h4 id="基本概念">基本概念</h4>
+<ul>
+<li><strong>定义域</strong>：使函数有意义的自变量取值范围</li>
+<li><strong>值域</strong>：函数值的取值范围</li>
+<li><strong>复合函数</strong>：$f(g(x))$，注意定义域的变化</li>
+<li><strong>反函数</strong>：$y = f(x)$ 的反函数 $x = f^{-1}(y)$，单调函数必存在反函数</li>
+</ul>
+<h4 id="基本初等函数">基本初等函数</h4>
+<ul>
+<li>幂函数：$y = x^\mu$</li>
+<li>指数函数：$y = a^x$（$a&gt;0, a\neq 1$）</li>
+<li>对数函数：$y = \log_a x$（$a&gt;0, a\neq 1$）</li>
+<li>三角函数：$\sin x, \cos x, \tan x, \cot x, \sec x, \csc x$</li>
+<li>反三角函数：$\arcsin x, \arccos x, \arctan x, \text{arccot } x$</li>
+</ul>
+<h4 id="函数的性质">函数的性质</h4>
+<ul>
+<li><strong>有界性</strong>：$\exists M &gt; 0, \forall x \in D, |f(x)| \leq M$</li>
+<li><strong>单调性</strong>：$x_1 &lt; x_2 \Rightarrow f(x_1) &lt; f(x_2)$（增）/ $f(x_1) &gt; f(x_2)$（减）</li>
+<li><strong>奇偶性</strong>：奇函数 $f(-x) = -f(x)$，偶函数 $f(-x) = f(x)$</li>
+<li><strong>周期性</strong>：$f(x+T) = f(x)$，最小正周期</li>
+</ul>
+<h4 id="竞赛常用的函数恒等式">竞赛常用的函数恒等式</h4>
+<ul>
+<li>$\sin^2 x + \cos^2 x = 1$</li>
+<li>$1 + \tan^2 x = \sec^2 x$</li>
+<li>$1 + \cot^2 x = \csc^2 x$</li>
+<li>$\sin(2x) = 2\sin x \cos x$</li>
+<li>$\cos(2x) = \cos^2 x - \sin^2 x = 2\cos^2 x - 1 = 1 - 2\sin^2 x$</li>
+<li>和差化积、积化和差公式（必背！）</li>
+<li>$e^{x+y} = e^x e^y$，$\ln(xy) = \ln x + \ln y$</li>
+<li>$\arcsin x + \arccos x = \frac{\pi}{2}$（$x \in [-1, 1]$）</li>
+<li>$\arctan x + \text{arccot } x = \frac{\pi}{2}$</li>
+</ul>
+<h3 id="12-极限">1.2 极限</h3>
+<h4 id="数列极限">数列极限</h4>
+<p><strong>定义（$\varepsilon$-$N$ 语言）</strong>：</p>
+<p>$\lim\limits_{n\to\infty} x_n = A \iff \forall \varepsilon &gt; 0, \exists N \in \mathbb{N}, \text{当 } n &gt; N \text{ 时}, |x_n - A| &lt; \varepsilon$</p>
+<p><strong>收敛数列的性质</strong>：</p>
+<ul>
+<li>极限唯一性</li>
+<li>收敛必有界（有界不一定收敛）</li>
+<li>保号性：若 $\lim\limits_{n\to\infty} x_n = A &gt; 0$，则存在 $N$，当 $n &gt; N$ 时 $x_n &gt; 0$</li>
+<li>四则运算法则</li>
+</ul>
+<p><strong>数列极限存在准则</strong>：</p>
+<ul>
+<li><strong>夹逼准则</strong>：若 $y_n \leq x_n \leq z_n$ 且 $\lim y_n = \lim z_n = A$，则 $\lim x_n = A$</li>
+<li><strong>单调有界准则</strong>：单调有界数列必有极限</li>
+</ul>
+<p><strong>Stolz 定理（竞赛重点！）</strong>：</p>
+<ul>
+<li>$\frac{0}{0}$ 型：若 $\lim y_n = 0$，$\lim x_n = 0$，且 $\{y_n\}$ 严格单调，则</li>
+</ul>
+<p>  $$\lim_{n\to\infty}\frac{x_n}{y_n} = \lim_{n\to\infty}\frac{x_n - x_{n-1}}{y_n - y_{n-1}}$$</p>
+<ul>
+<li>$\frac{*}{\infty}$ 型：若 $\{y_n\}$ 严格单调趋于 $\infty$，则同上结论成立</li>
+</ul>
+<p><strong>定积分定义求极限</strong>：</p>
+<p>$$\lim_{n\to\infty}\frac{1}{n}\sum_{k=1}^{n}f\left(\frac{k}{n}\right) = \int_0^1 f(x)dx$$</p>
+<p>更一般：</p>
+<p>$$\lim_{n\to\infty}\frac{b-a}{n}\sum_{k=1}^{n}f\left(a + \frac{k(b-a)}{n}\right) = \int_a^b f(x)dx$$</p>
+<h4 id="函数极限">函数极限</h4>
+<p><strong>两个重要极限</strong>：</p>
+<ul>
+<li>$\lim\limits_{x\to 0} \frac{\sin x}{x} = 1$</li>
+<li>$\lim\limits_{x\to \infty} \left(1 + \frac{1}{x}\right)^x = e$ 或 $\lim\limits_{x\to 0} (1 + x)^{1/x} = e$</li>
+</ul>
+<p>推广：</p>
+<ul>
+<li>$\lim\limits_{u\to 0} (1 + u)^{1/u} = e$</li>
+<li>$\lim\limits_{u\to 0} \frac{\ln(1+u)}{u} = 1$</li>
+<li>$\lim\limits_{u\to 0} \frac{e^u - 1}{u} = 1$</li>
+</ul>
+<h4 id="极限的计算方法">极限的计算方法</h4>
+<p>##### 方法一：等价无穷小代换（最重要！）</p>
+<p>当 $x \to 0$ 时：</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th>等价代换</th>
+<th></th>
+</tr></thead><tbody>
+<tr>
+<td>$\sin x \sim x$</td>
+<td>$\arcsin x \sim x$</td>
+</tr>
+<tr>
+<td>$\tan x \sim x$</td>
+<td>$\arctan x \sim x$</td>
+</tr>
+<tr>
+<td>$\ln(1+x) \sim x$</td>
+<td>$e^x - 1 \sim x$</td>
+</tr>
+<tr>
+<td>$a^x - 1 \sim x\ln a$</td>
+<td>$1 - \cos x \sim \dfrac{1}{2}x^2$</td>
+</tr>
+<tr>
+<td>$(1+x)^\alpha - 1 \sim \alpha x$</td>
+<td></td>
+</tr>
+<tr>
+<td>$x - \sin x \sim \dfrac{1}{6}x^3$</td>
+<td>$\arcsin x - x \sim \dfrac{1}{6}x^3$</td>
+</tr>
+<tr>
+<td>$\tan x - x \sim \dfrac{1}{3}x^3$</td>
+<td>$x - \arctan x \sim \dfrac{1}{3}x^3$</td>
+</tr>
+<tr>
+<td>$\tan x - \sin x \sim \dfrac{1}{2}x^3$</td>
+<td></td>
+</tr>
+</tbody></table></div>
+<p>&gt; <strong>警告</strong>：等价无穷小代换<strong>只能用于乘除</strong>，不可直接用于加减！</p>
+<p>##### 方法二：Taylor 展开（竞赛利器）</p>
+<p>常见 Maclaurin 展开：</p>
+<ul>
+<li>$e^x = 1 + x + \dfrac{x^2}{2!} + \dfrac{x^3}{3!} + \cdots + \dfrac{x^n}{n!} + o(x^n)$</li>
+<li>$\sin x = x - \dfrac{x^3}{3!} + \dfrac{x^5}{5!} - \cdots + (-1)^n\dfrac{x^{2n+1}}{(2n+1)!} + o(x^{2n+2})$</li>
+<li>$\cos x = 1 - \dfrac{x^2}{2!} + \dfrac{x^4}{4!} - \cdots + (-1)^n\dfrac{x^{2n}}{(2n)!} + o(x^{2n+1})$</li>
+<li>$\ln(1+x) = x - \dfrac{x^2}{2} + \dfrac{x^3}{3} - \cdots + (-1)^{n-1}\dfrac{x^n}{n} + o(x^n)$</li>
+<li>$(1+x)^\alpha = 1 + \alpha x + \dfrac{\alpha(\alpha-1)}{2!}x^2 + \cdots + o(x^n)$</li>
+<li>$\dfrac{1}{1-x} = 1 + x + x^2 + \cdots + x^n + o(x^n)$</li>
+<li>$\arctan x = x - \dfrac{x^3}{3} + \dfrac{x^5}{5} - \cdots + (-1)^n\dfrac{x^{2n+1}}{2n+1} + o(x^{2n+2})$</li>
+<li>$\arcsin x = x + \dfrac{x^3}{6} + \dfrac{3x^5}{40} + o(x^6)$</li>
+<li>$\tan x = x + \dfrac{x^3}{3} + \dfrac{2x^5}{15} + o(x^6)$</li>
+</ul>
+<p><strong>技巧</strong>：展开到足够高的阶数，直到能确定极限值。</p>
+<p>##### 方法三：洛必达法则</p>
+<p>$\dfrac{0}{0}$ 型或 $\dfrac{\infty}{\infty}$ 型：</p>
+<p>$$\lim_{x\to a} \frac{f(x)}{g(x)} = \lim_{x\to a} \frac{f'(x)}{g'(x)}$$</p>
+<ul>
+<li>每次使用前必须验证是否为 $\frac{0}{0}$ 或 $\frac{\infty}{\infty}$ 型</li>
+<li>可反复使用</li>
+<li>其他不定式需先转化：$0\cdot\infty, \infty - \infty, 1^\infty, 0^0, \infty^0$</li>
+</ul>
+<p>##### 方法四：$1^\infty$ 型公式</p>
+<p>$$\lim [f(x)]^{g(x)} = e^{\lim g(x)[f(x)-1]}$$</p>
+<p>##### 方法五：夹逼准则与单调有界准则</p>
+<ul>
+<li>夹逼准则：构造上下界函数求极限</li>
+<li>单调有界准则：先证单调性和有界性，再设极限解方程</li>
+</ul>
+<h3 id="13-连续与间断">1.3 连续与间断</h3>
+<h4 id="连续的定义">连续的定义</h4>
+<p>$f(x)$ 在 $x_0$ 连续 $\iff \lim\limits_{x\to x_0} f(x) = f(x_0)$</p>
+<p>左连续 + 右连续 ⇒ 连续</p>
+<h4 id="间断点分类">间断点分类</h4>
+<p><strong>第一类</strong>（左右极限均存在）：</p>
+<ul>
+<li>可去间断点：左右极限相等但不等于函数值</li>
+<li>跳跃间断点：左右极限不相等</li>
+</ul>
+<p><strong>第二类</strong>（左右极限至少一个不存在）：</p>
+<ul>
+<li>无穷间断点：极限为 $\infty$</li>
+<li>振荡间断点：极限振荡不存在</li>
+</ul>
+<h4 id="闭区间上连续函数的性质">闭区间上连续函数的性质</h4>
+<ul>
+<li><strong>有界性与最值定理</strong>：闭区间上连续函数必有界且能取到最大值和最小值</li>
+<li><strong>介值定理</strong>：连续函数可取到两端点值之间的一切值</li>
+<li><strong>零点定理</strong>：若 $f(a)f(b) &lt; 0$，则存在 $\xi \in (a,b)$ 使 $f(\xi) = 0$（证明方程有根的核心工具）</li>
+<li><strong>Cantor 定理</strong>：闭区间上连续 ⇒ 一致连续</li>
+</ul>
+<hr class="section-divider">
+<h2 id="2-导数与微分">2. 导数与微分</h2>
+<h3 id="21-导数的定义">2.1 导数的定义</h3>
+<p>$$f'(x_0) = \lim_{\Delta x \to 0} \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} = \lim_{x\to x_0}\frac{f(x) - f(x_0)}{x - x_0}$$</p>
+<p><strong>几何意义</strong>：曲线在 $(x_0, f(x_0))$ 处的切线斜率</p>
+<ul>
+<li>切线方程：$y - f(x_0) = f'(x_0)(x - x_0)$</li>
+<li>法线方程：$y - f(x_0) = -\frac{1}{f'(x_0)}(x - x_0)$</li>
+</ul>
+<p><strong>可导 ⇔ 左右导数存在且相等</strong></p>
+<p><strong>可导 ⇒ 连续；连续 ≠ 可导</strong>（经典反例：$|x|$ 在 $x=0$）</p>
+<h3 id="22-基本求导公式">2.2 基本求导公式</h3>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th>$f(x)$</th>
+<th>$f'(x)$</th>
+<th></th>
+<th>$f(x)$</th>
+<th>$f'(x)$</th>
+</tr></thead><tbody>
+<tr>
+<td>$C$</td>
+<td>$0$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$x^n$</td>
+<td>$nx^{n-1}$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$e^x$</td>
+<td>$e^x$</td>
+<td></td>
+<td>$a^x$</td>
+<td>$a^x \ln a$</td>
+</tr>
+<tr>
+<td>$\ln x$</td>
+<td>$\dfrac{1}{x}$</td>
+<td></td>
+<td>$\log_a x$</td>
+<td>$\dfrac{1}{x\ln a}$</td>
+</tr>
+<tr>
+<td>$\sin x$</td>
+<td>$\cos x$</td>
+<td></td>
+<td>$\cos x$</td>
+<td>$-\sin x$</td>
+</tr>
+<tr>
+<td>$\tan x$</td>
+<td>$\sec^2 x$</td>
+<td></td>
+<td>$\cot x$</td>
+<td>$-\csc^2 x$</td>
+</tr>
+<tr>
+<td>$\sec x$</td>
+<td>$\sec x \tan x$</td>
+<td></td>
+<td>$\csc x$</td>
+<td>$-\csc x \cot x$</td>
+</tr>
+<tr>
+<td>$\arcsin x$</td>
+<td>$\dfrac{1}{\sqrt{1-x^2}}$</td>
+<td></td>
+<td>$\arccos x$</td>
+<td>$-\dfrac{1}{\sqrt{1-x^2}}$</td>
+</tr>
+<tr>
+<td>$\arctan x$</td>
+<td>$\dfrac{1}{1+x^2}$</td>
+<td></td>
+<td>$\text{arccot }x$</td>
+<td>$-\dfrac{1}{1+x^2}$</td>
+</tr>
+</tbody></table></div>
+<h3 id="23-高阶导数">2.3 高阶导数</h3>
+<p><strong>常用公式</strong>：</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th>$f(x)$</th>
+<th>$f^{(n)}(x)$</th>
+</tr></thead><tbody>
+<tr>
+<td>$e^x$</td>
+<td>$e^x$</td>
+</tr>
+<tr>
+<td>$a^x$</td>
+<td>$a^x (\ln a)^n$</td>
+</tr>
+<tr>
+<td>$\ln(1+x)$</td>
+<td>$(-1)^{n-1}\dfrac{(n-1)!}{(1+x)^n}$</td>
+</tr>
+<tr>
+<td>$\sin x$</td>
+<td>$\sin\left(x + \dfrac{n\pi}{2}\right)$</td>
+</tr>
+<tr>
+<td>$\cos x$</td>
+<td>$\cos\left(x + \dfrac{n\pi}{2}\right)$</td>
+</tr>
+<tr>
+<td>$\dfrac{1}{x}$</td>
+<td>$(-1)^n \dfrac{n!}{x^{n+1}}$</td>
+</tr>
+<tr>
+<td>$\dfrac{1}{ax+b}$</td>
+<td>$(-1)^n \dfrac{n! a^n}{(ax+b)^{n+1}}$</td>
+</tr>
+</tbody></table></div>
+<p><strong>Leibniz 公式</strong>（乘积高阶导数）：</p>
+<p>$$(uv)^{(n)} = \sum_{k=0}^{n} C_n^k u^{(n-k)} v^{(k)}$$</p>
+<h3 id="24-隐函数与参数方程求导">2.4 隐函数与参数方程求导</h3>
+<p><strong>隐函数</strong> $F(x, y) = 0$：$\dfrac{dy}{dx} = -\dfrac{F_x}{F_y}$</p>
+<p><strong>参数方程</strong> $x = \varphi(t), y = \psi(t)$：</p>
+<ul>
+<li>$\dfrac{dy}{dx} = \dfrac{\psi'(t)}{\varphi'(t)}$</li>
+<li>$\dfrac{d^2y}{dx^2} = \dfrac{\varphi'(t)\psi''(t) - \psi'(t)\varphi''(t)}{[\varphi'(t)]^3}$</li>
+</ul>
+<h3 id="25-微分">2.5 微分</h3>
+<p>$$dy = f'(x)dx$$</p>
+<p>近似计算：$f(x_0 + \Delta x) \approx f(x_0) + f'(x_0)\Delta x$</p>
+<p>一阶微分形式不变性：无论 $x$ 是自变量还是中间变量，$dy = f'(x)dx$ 形式不变。</p>
+<hr class="section-divider">
+<h2 id="3-微分中值定理与导数的应用">3. 微分中值定理与导数的应用</h2>
+<h3 id="31-四大中值定理">3.1 四大中值定理</h3>
+<h4 id="Rolle-定理">Rolle 定理</h4>
+<p><strong>条件</strong>：$f$ 在 $[a,b]$ 上连续，$(a,b)$ 内可导，$f(a)=f(b)$</p>
+<p><strong>结论</strong>：存在 $\xi \in (a,b)$ 使 $f'(\xi) = 0$</p>
+<h4 id="Lagrange-中值定理">Lagrange 中值定理</h4>
+<p><strong>条件</strong>：$f$ 在 $[a,b]$ 上连续，$(a,b)$ 内可导</p>
+<p><strong>结论</strong>：存在 $\xi \in (a,b)$ 使 $f'(\xi) = \dfrac{f(b)-f(a)}{b-a}$</p>
+<p>等价形式：$f(b) - f(a) = f'(\xi)(b-a)$</p>
+<h4 id="Cauchy-中值定理">Cauchy 中值定理</h4>
+<p><strong>条件</strong>：$f,g$ 在 $[a,b]$ 上连续，$(a,b)$ 内可导，$g'(x) \neq 0$</p>
+<p><strong>结论</strong>：存在 $\xi \in (a,b)$ 使 $\dfrac{f(b)-f(a)}{g(b)-g(a)} = \dfrac{f'(\xi)}{g'(\xi)}$</p>
+<p>&gt; <strong>关系</strong>：Rolle ⊂ Lagrange ⊂ Cauchy</p>
+<h4 id="Taylor-中值定理">Taylor 中值定理</h4>
+<p><strong>带 Lagrange 余项</strong>：</p>
+<p>$$f(x) = \sum_{k=0}^{n}\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k + \frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}$$</p>
+<p><strong>带 Peano 余项</strong>：</p>
+<p>$$f(x) = \sum_{k=0}^{n}\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k + o((x-x_0)^n)$$</p>
+<h3 id="32-中值定理证明题技巧（竞赛核心）">3.2 中值定理证明题技巧（竞赛核心）</h3>
+<h4 id="辅助函数构造法">辅助函数构造法</h4>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th>要证结论</th>
+<th>辅助函数 $F(x)$</th>
+</tr></thead><tbody>
+<tr>
+<td>$f'(\xi) = 0$</td>
+<td>$F(x) = f(x)$</td>
+</tr>
+<tr>
+<td>$f'(\xi) + f(\xi) = 0$</td>
+<td>$F(x) = e^x f(x)$</td>
+</tr>
+<tr>
+<td>$f'(\xi) - f(\xi) = 0$</td>
+<td>$F(x) = e^{-x} f(x)$</td>
+</tr>
+<tr>
+<td>$\xi f'(\xi) + f(\xi) = 0$</td>
+<td>$F(x) = xf(x)$</td>
+</tr>
+<tr>
+<td>$\xi f'(\xi) - f(\xi) = 0$</td>
+<td>$F(x) = \dfrac{f(x)}{x}$</td>
+</tr>
+<tr>
+<td>$f'(\xi) + \lambda f(\xi) = 0$</td>
+<td>$F(x) = e^{\lambda x} f(x)$</td>
+</tr>
+<tr>
+<td>$f'(\xi) + p(\xi)f(\xi) = 0$</td>
+<td>$F(x) = e^{\int p(x)dx} f(x)$</td>
+</tr>
+</tbody></table></div>
+<p><strong>双中值问题</strong>：通常需要将区间拆分，分别用 Lagrange 定理，或同时用 Lagrange 和 Cauchy 定理。</p>
+<h3 id="33-单调性与极值">3.3 单调性与极值</h3>
+<p><strong>单调性</strong>：$f'(x) &gt; 0$ 严格增，$f'(x) &lt; 0$ 严格减</p>
+<p><strong>极值必要条件</strong>：可导且取极值 ⇒ $f'(x_0) = 0$（驻点）</p>
+<p><strong>极值第一充分条件</strong>：导数在 $x_0$ 左右变号</p>
+<p><strong>极值第二充分条件</strong>：$f'(x_0)=0$ 且 $f''(x_0) \neq 0$ —— $f''&gt;0$ 极小，$f''&lt;0$ 极大</p>
+<p><strong>推广</strong>：若 $f'(x_0)=\cdots=f^{(n-1)}(x_0)=0$ 而 $f^{(n)}(x_0) \neq 0$：</p>
+<ul>
+<li>$n$ 为偶数：$f^{(n)}&gt;0$ 极小，$f^{(n)}&lt;0$ 极大</li>
+<li>$n$ 为奇数：不是极值，是拐点</li>
+</ul>
+<h3 id="34-凹凸性与拐点">3.4 凹凸性与拐点</h3>
+<ul>
+<li>$f''(x) &gt; 0$：凹（∪）；$f''(x) &lt; 0$：凸（∩）</li>
+<li>拐点：二阶导数变号处</li>
+</ul>
+<h3 id="35-渐近线">3.5 渐近线</h3>
+<ul>
+<li><strong>铅直渐近线</strong>：$\lim_{x\to x_0} f(x) = \infty$ ⇒ $x = x_0$</li>
+<li><strong>水平渐近线</strong>：$\lim_{x\to\infty} f(x) = c$ ⇒ $y = c$</li>
+<li><strong>斜渐近线</strong>：$y = kx + b$，$k = \lim_{x\to\infty} \frac{f(x)}{x}$，$b = \lim_{x\to\infty}[f(x)-kx]$</li>
+</ul>
+<h3 id="36-曲率">3.6 曲率</h3>
+<p>$$K = \frac{|y''|}{(1 + y'^2)^{3/2}}, \quad \rho = \frac{1}{K}$$</p>
+<hr class="section-divider">
+<h2 id="4-不定积分">4. 不定积分</h2>
+<h3 id="41-基本概念">4.1 基本概念</h3>
+<p>$\int f(x)dx = F(x) + C$，其中 $F'(x) = f(x)$</p>
+<h3 id="42-基本积分公式">4.2 基本积分公式</h3>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th>积分</th>
+<th>结果</th>
+<th>积分</th>
+<th>结果</th>
+</tr></thead><tbody>
+<tr>
+<td>$\int x^\mu dx$</td>
+<td>$\dfrac{x^{\mu+1}}{\mu+1}+C$（$\mu\neq -1$）</td>
+<td>$\int \dfrac{1}{x}dx$</td>
+<td>$\ln|x|+C$</td>
+</tr>
+<tr>
+<td>$\int e^x dx$</td>
+<td>$e^x + C$</td>
+<td>$\int a^x dx$</td>
+<td>$\dfrac{a^x}{\ln a}+C$</td>
+</tr>
+<tr>
+<td>$\int \sin x dx$</td>
+<td>$-\cos x + C$</td>
+<td>$\int \cos x dx$</td>
+<td>$\sin x + C$</td>
+</tr>
+<tr>
+<td>$\int \tan x dx$</td>
+<td>$-\ln|\cos x| + C$</td>
+<td>$\int \cot x dx$</td>
+<td>$\ln|\sin x| + C$</td>
+</tr>
+<tr>
+<td>$\int \sec^2 x dx$</td>
+<td>$\tan x + C$</td>
+<td>$\int \csc^2 x dx$</td>
+<td>$-\cot x + C$</td>
+</tr>
+<tr>
+<td>$\int \sec x \tan x dx$</td>
+<td>$\sec x + C$</td>
+<td>$\int \csc x \cot x dx$</td>
+<td>$-\csc x + C$</td>
+</tr>
+<tr>
+<td>$\int \sec x dx$</td>
+<td>$\ln|\sec x+\tan x|+C$</td>
+<td>$\int \csc x dx$</td>
+<td>$\ln|\csc x-\cot x|+C$</td>
+</tr>
+<tr>
+<td>$\int \dfrac{1}{1+x^2}dx$</td>
+<td>$\arctan x + C$</td>
+<td>$\int \dfrac{1}{\sqrt{1-x^2}}dx$</td>
+<td>$\arcsin x + C$</td>
+</tr>
+<tr>
+<td>$\int \dfrac{1}{x^2-a^2}dx$</td>
+<td>$\dfrac{1}{2a}\ln\left|\dfrac{x-a}{x+a}\right|+C$</td>
+</tr>
+<tr>
+<td>$\int \dfrac{1}{\sqrt{x^2\pm a^2}}dx$</td>
+<td>$\ln\left|x+\sqrt{x^2\pm a^2}\right|+C$</td>
+</tr>
+<tr>
+<td>$\int \dfrac{1}{a^2+x^2}dx$</td>
+<td>$\dfrac{1}{a}\arctan\dfrac{x}{a}+C$</td>
+</tr>
+<tr>
+<td>$\int \dfrac{1}{\sqrt{a^2-x^2}}dx$</td>
+<td>$\arcsin\dfrac{x}{a}+C$</td>
+</tr>
+</tbody></table></div>
+<h3 id="43-五大积分方法">4.3 五大积分方法</h3>
+<h4 id="一、第一类换元法（凑微分）">一、第一类换元法（凑微分）</h4>
+<p>核心思想：$\int f[\varphi(x)]\varphi'(x)dx = \int f(u)du$</p>
+<p>常见凑微分形式：</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th>被积形式</th>
+<th>凑法</th>
+</tr></thead><tbody>
+<tr>
+<td>$f(ax+b)dx$</td>
+<td>$\frac{1}{a}f(ax+b)d(ax+b)$</td>
+</tr>
+<tr>
+<td>$f(x^n)x^{n-1}dx$</td>
+<td>$\frac{1}{n}f(x^n)d(x^n)$</td>
+</tr>
+<tr>
+<td>$f(\ln x)\frac{1}{x}dx$</td>
+<td>$f(\ln x)d(\ln x)$</td>
+</tr>
+<tr>
+<td>$f(e^x)e^x dx$</td>
+<td>$f(e^x)d(e^x)$</td>
+</tr>
+<tr>
+<td>$f(\sin x)\cos x dx$</td>
+<td>$f(\sin x)d(\sin x)$</td>
+</tr>
+<tr>
+<td>$f(\cos x)\sin x dx$</td>
+<td>$-f(\cos x)d(\cos x)$</td>
+</tr>
+<tr>
+<td>$f(\tan x)\sec^2 x dx$</td>
+<td>$f(\tan x)d(\tan x)$</td>
+</tr>
+<tr>
+<td>$f(\arctan x)\frac{1}{1+x^2}dx$</td>
+<td>$f(\arctan x)d(\arctan x)$</td>
+</tr>
+<tr>
+<td>$f(\arcsin x)\frac{1}{\sqrt{1-x^2}}dx$</td>
+<td>$f(\arcsin x)d(\arcsin x)$</td>
+</tr>
+</tbody></table></div>
+<h4 id="二、第二类换元法">二、第二类换元法</h4>
+<ul>
+<li>$\sqrt{a^2 - x^2}$ → 令 $x = a\sin t$</li>
+<li>$\sqrt{a^2 + x^2}$ → 令 $x = a\tan t$</li>
+<li>$\sqrt{x^2 - a^2}$ → 令 $x = a\sec t$</li>
+<li>分母次数远高于分子 → 倒代换 $x = \frac{1}{t}$</li>
+<li>含 $\sqrt[n]{ax+b}$ → 令 $t = \sqrt[n]{ax+b}$</li>
+</ul>
+<h4 id="三、分部积分法">三、分部积分法</h4>
+<p>$$\int u dv = uv - \int v du$$</p>
+<p><strong>选 $u$ 的优先级</strong>（"反对幂指三"）：反三角函数 &gt; 对数函数 &gt; 幂函数 &gt; 指数函数 &gt; 三角函数</p>
+<p>常见类型：</p>
+<ul>
+<li>$\int x^n e^x dx$：$u = x^n$</li>
+<li>$\int x^n \sin x dx$：$u = x^n$</li>
+<li>$\int x^n \ln x dx$：$u = \ln x$</li>
+<li>$\int e^x \sin x dx$：两次分部积分后解方程</li>
+<li>$\int x^n \arctan x dx$：$u = \arctan x$</li>
+</ul>
+<h4 id="四、有理函数积分">四、有理函数积分</h4>
+<p>$\int \frac{P(x)}{Q(x)}dx$：先化为真分式 → 分母因式分解 → 部分分式 → 逐项积分</p>
+<h4 id="五、三角有理函数积分">五、三角有理函数积分</h4>
+<p>$\int R(\sin x, \cos x)dx$：</p>
+<ul>
+<li>$R(-\sin x, \cos x) = -R(\sin x, \cos x)$ → $t = \cos x$</li>
+<li>$R(\sin x, -\cos x) = -R(\sin x, \cos x)$ → $t = \sin x$</li>
+<li>$R(-\sin x, -\cos x) = R(\sin x, \cos x)$ → $t = \tan x$</li>
+<li>万能代换（最后手段）：$t = \tan\frac{x}{2}$</li>
+</ul>
+<hr class="section-divider">
+<h2 id="5-定积分">5. 定积分</h2>
+<h3 id="51-定义与性质">5.1 定义与性质</h3>
+<p>$$\int_a^b f(x)dx = \lim_{\lambda\to 0}\sum_{i=1}^{n} f(\xi_i)\Delta x_i$$</p>
+<p><strong>定积分存在定理</strong>：闭区间上连续 ⇒ 可积；闭区间上有界且只有有限个间断点 ⇒ 可积</p>
+<p><strong>积分中值定理</strong>：存在 $\xi \in [a, b]$ 使 $\int_a^b f(x)dx = f(\xi)(b-a)$</p>
+<p><strong>推广</strong>：若 $g(x)$ 不变号，则 $\int_a^b f(x)g(x)dx = f(\xi)\int_a^b g(x)dx$</p>
+<h3 id="52-变限积分求导">5.2 变限积分求导</h3>
+<p>$$\frac{d}{dx}\int_{a(x)}^{b(x)} f(t)dt = f(b(x))b'(x) - f(a(x))a'(x)$$</p>
+<h3 id="53-Newton-Leibniz-公式">5.3 Newton-Leibniz 公式</h3>
+<p>$$\int_a^b f(x)dx = F(b) - F(a)$$</p>
+<h3 id="54-重要定积分公式">5.4 重要定积分公式</h3>
+<h4 id="Wallis-公式">Wallis 公式</h4>
+<p>$$I_n = \int_0^{\pi/2} \sin^n x dx = \int_0^{\pi/2} \cos^n x dx = \begin{cases} \dfrac{(n-1)!!}{n!!} \cdot \dfrac{\pi}{2} &amp; n \text{ 为偶数} \\ \dfrac{(n-1)!!}{n!!} &amp; n \text{ 为奇数} \end{cases}$$</p>
+<h4 id="常用结论">常用结论</h4>
+<ul>
+<li>$\int_0^\pi \sin^n x dx = 2\int_0^{\pi/2} \sin^n x dx$（$n$ 为偶数时成立）</li>
+<li>$\int_0^\pi xf(\sin x)dx = \frac{\pi}{2}\int_0^\pi f(\sin x)dx$</li>
+<li>$\int_{-\pi}^{\pi} \sin(mx)\sin(nx)dx = \begin{cases} 0 &amp; m \neq n \\ \pi &amp; m = n \neq 0 \end{cases}$</li>
+</ul>
+<h3 id="55-反常积分">5.5 反常积分</h3>
+<p><strong>无穷限</strong>：$\int_1^{+\infty} \frac{1}{x^p}dx$ 收敛 $\iff p &gt; 1$</p>
+<p><strong>瑕积分</strong>：$\int_a^b \frac{1}{(x-a)^p}dx$ 收敛 $\iff p &lt; 1$</p>
+<p><strong>$\Gamma$ 函数</strong>：$\Gamma(s) = \int_0^{+\infty} x^{s-1}e^{-x}dx$</p>
+<ul>
+<li>$\Gamma(s+1) = s\Gamma(s)$</li>
+<li>$\Gamma(n+1) = n!$</li>
+<li>$\Gamma(\frac{1}{2}) = \sqrt{\pi}$</li>
+</ul>
+<hr class="section-divider">
+<h2 id="6-定积分的应用">6. 定积分的应用</h2>
+<h3 id="61-平面图形面积">6.1 平面图形面积</h3>
+<ul>
+<li>直角坐标：$A = \int_a^b [f(x) - g(x)]dx$</li>
+<li>极坐标：$A = \frac{1}{2}\int_{\alpha}^{\beta} r^2(\theta)d\theta$</li>
+<li>椭圆面积：$\pi ab$</li>
+<li>心形线 $r = a(1+\cos\theta)$ 面积：$\frac{3}{2}\pi a^2$</li>
+</ul>
+<h3 id="62-旋转体体积">6.2 旋转体体积</h3>
+<ul>
+<li>绕 $x$ 轴：$V_x = \pi\int_a^b f^2(x)dx$</li>
+<li>绕 $y$ 轴（柱壳法）：$V_y = 2\pi\int_a^b x f(x)dx$</li>
+<li>球体体积：$\frac{4}{3}\pi R^3$</li>
+</ul>
+<h3 id="63-曲线弧长">6.3 曲线弧长</h3>
+<ul>
+<li>直角坐标：$s = \int_a^b \sqrt{1 + [f'(x)]^2} dx$</li>
+<li>参数方程：$s = \int_{t_1}^{t_2} \sqrt{[x'(t)]^2 + [y'(t)]^2} dt$</li>
+<li>极坐标：$s = \int_{\alpha}^{\beta} \sqrt{r^2(\theta) + [r'(\theta)]^2} d\theta$</li>
+</ul>
+<h3 id="64-旋转体侧面积">6.4 旋转体侧面积</h3>
+<p>$$S = 2\pi\int_a^b f(x)\sqrt{1 + [f'(x)]^2}dx$$</p>
+<h3 id="65-物理应用">6.5 物理应用</h3>
+<ul>
+<li>变力做功：$W = \int_a^b F(x)dx$</li>
+<li>古鲁金定理：$V = A \cdot 2\pi\bar{y}$（平面图形绕轴旋转体积 = 面积 × 形心经过距离）</li>
+</ul>
+<hr class="section-divider">
+<h2 id="7-空间解析几何与向量代数">7. 空间解析几何与向量代数</h2>
+<h3 id="71-向量运算">7.1 向量运算</h3>
+<p><strong>点积</strong>：$\vec{a} \cdot \vec{b} = |\vec{a}||\vec{b}|\cos\theta = a_xb_x + a_yb_y + a_zb_z$</p>
+<p><strong>叉积</strong>：</p>
+<p>$$\vec{a} \times \vec{b} = \begin{vmatrix} \vec{i} &amp; \vec{j} &amp; \vec{k} \\ a_x &amp; a_y &amp; a_z \\ b_x &amp; b_y &amp; b_z \end{vmatrix}$$</p>
+<p><strong>混合积</strong>：$[\vec{a}\vec{b}\vec{c}] = (\vec{a} \times \vec{b}) \cdot \vec{c}$ ——平行六面体体积</p>
+<ul>
+<li>$\vec{a} \perp \vec{b} \iff \vec{a} \cdot \vec{b} = 0$</li>
+<li>$\vec{a} \parallel \vec{b} \iff \vec{a} \times \vec{b} = \vec{0}$</li>
+<li>$\vec{a},\vec{b},\vec{c}$ 共面 $\iff [\vec{a}\vec{b}\vec{c}] = 0$</li>
+</ul>
+<h3 id="72-平面">7.2 平面</h3>
+<ul>
+<li>点法式：$A(x-x_0) + B(y-y_0) + C(z-z_0) = 0$</li>
+<li>一般式：$Ax + By + Cz + D = 0$</li>
+<li>点到平面距离：$d = \dfrac{|Ax_0+By_0+Cz_0+D|}{\sqrt{A^2+B^2+C^2}}$</li>
+</ul>
+<h3 id="73-直线">7.3 直线</h3>
+<ul>
+<li>点向式：$\dfrac{x-x_0}{m} = \dfrac{y-y_0}{n} = \dfrac{z-z_0}{p}$</li>
+<li>参数式：$x = x_0+mt, y = y_0+nt, z = z_0+pt$</li>
+</ul>
+<h3 id="74-距离公式">7.4 距离公式</h3>
+<ul>
+<li>点到直线距离：$d = \dfrac{|\overrightarrow{M_0M_1} \times \vec{s}|}{|\vec{s}|}$</li>
+<li>异面直线距离：$d = \dfrac{|[\vec{s}_1\vec{s}_2\overrightarrow{M_1M_2}]|}{|\vec{s}_1 \times \vec{s}_2|}$</li>
+</ul>
+<h3 id="75-常见二次曲面">7.5 常见二次曲面</h3>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th>曲面</th>
+<th>方程</th>
+</tr></thead><tbody>
+<tr>
+<td>椭球面</td>
+<td>$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}=1$</td>
+</tr>
+<tr>
+<td>单叶双曲面</td>
+<td>$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}-\dfrac{z^2}{c^2}=1$</td>
+</tr>
+<tr>
+<td>双叶双曲面</td>
+<td>$\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}-\dfrac{z^2}{c^2}=1$</td>
+</tr>
+<tr>
+<td>椭圆抛物面</td>
+<td>$z = \dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}$</td>
+</tr>
+<tr>
+<td>双曲抛物面</td>
+<td>$z = \dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}$（马鞍面）</td>
+</tr>
+<tr>
+<td>二次锥面</td>
+<td>$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}-\dfrac{z^2}{c^2}=0$</td>
+</tr>
+</tbody></table></div>
+<hr class="section-divider">
+<h2 id="8-多元函数微分学">8. 多元函数微分学</h2>
+<h3 id="81-基本概念">8.1 基本概念</h3>
+<p><strong>二重极限</strong>：$(x,y) \to (x_0,y_0)$ 的方式是任意的。若沿不同路径极限不同，则极限不存在。</p>
+<p>证明极限不存在的常用方法：沿 $y=kx$ 或 $y=x^2$ 趋近得不同值。</p>
+<p>求二重极限的方法：</p>
+<ul>
+<li>连续性直接代入</li>
+<li>极坐标变换：$x = x_0 + r\cos\theta, y = y_0 + r\sin\theta, r\to 0$</li>
+<li>夹逼准则</li>
+</ul>
+<h3 id="82-偏导数与全微分">8.2 偏导数与全微分</h3>
+<p><strong>偏导数</strong>：</p>
+<p>$$f_x(x_0,y_0) = \lim_{\Delta x \to 0} \frac{f(x_0+\Delta x, y_0) - f(x_0, y_0)}{\Delta x}$$</p>
+<p><strong>偏导存在 $\neq$ 连续</strong>（与一元函数不同！）</p>
+<p><strong>全微分</strong>：$dz = f_x dx + f_y dy$</p>
+<p><strong>可微的条件</strong>：偏导连续 ⇒ 可微 ⇒ 偏导存在 + 连续</p>
+<p>判断可微的步骤：</p>
+<ul>
+<li>检查 $f_x, f_y$ 是否存在</li>
+<li>验证 $\lim\limits_{\rho\to 0} \frac{\Delta z - f_x\Delta x - f_y\Delta y}{\rho} = 0$</li>
+</ul>
+<h3 id="83-链式法则">8.3 链式法则</h3>
+<p>$z = f(u,v), u = u(x,y), v = v(x,y)$：</p>
+<p>$$\frac{\partial z}{\partial x} = \frac{\partial z}{\partial u}\frac{\partial u}{\partial x} + \frac{\partial z}{\partial v}\frac{\partial v}{\partial x}$$</p>
+<p>一阶全微分形式不变性：$dz = \frac{\partial z}{\partial u}du + \frac{\partial z}{\partial v}dv$</p>
+<h3 id="84-隐函数求导">8.4 隐函数求导</h3>
+<p>$F(x,y)=0$：$\dfrac{dy}{dx} = -\dfrac{F_x}{F_y}$</p>
+<p>$F(x,y,z)=0$：$\dfrac{\partial z}{\partial x} = -\dfrac{F_x}{F_z}, \dfrac{\partial z}{\partial y} = -\dfrac{F_y}{F_z}$</p>
+<h3 id="85-方向导数与梯度">8.5 方向导数与梯度</h3>
+<p><strong>方向导数</strong>：$\dfrac{\partial f}{\partial \vec{l}} = f_x\cos\alpha + f_y\cos\beta + f_z\cos\gamma$</p>
+<p><strong>梯度</strong>：$\nabla f = (f_x, f_y, f_z)$</p>
+<p>关系：$\dfrac{\partial f}{\partial \vec{l}} = \nabla f \cdot \vec{l}_0 = |\nabla f|\cos\theta$</p>
+<p>沿梯度方向增长最快，最大增长率为 $|\nabla f|$</p>
+<h3 id="86-多元函数极值">8.6 多元函数极值</h3>
+<h4 id="无条件极值">无条件极值</h4>
+<p><strong>必要条件</strong>：$f_x = f_y = 0$（驻点）</p>
+<p><strong>充分条件</strong>：$A = f_{xx}, B = f_{xy}, C = f_{yy}$</p>
+<ul>
+<li>$AC - B^2 &gt; 0$：$A &gt; 0$ 极小，$A &lt; 0$ 极大</li>
+<li>$AC - B^2 &lt; 0$：不是极值</li>
+<li>$AC - B^2 = 0$：无法判断</li>
+</ul>
+<h4 id="条件极值（Lagrange-乘数法）">条件极值（Lagrange 乘数法）</h4>
+<p>求 $f(x,y)$ 在 $\varphi(x,y)=0$ 条件下的极值：</p>
+<p>构造 $L(x,y,\lambda) = f(x,y) + \lambda\varphi(x,y)$</p>
+<p>解 $\begin{cases} f_x + \lambda\varphi_x = 0 \\ f_y + \lambda\varphi_y = 0 \\ \varphi = 0 \end{cases}$</p>
+<h3 id="87-几何应用">8.7 几何应用</h3>
+<p><strong>空间曲线</strong> $\vec{r}(t)$：切向量 $\vec{s} = (x'(t), y'(t), z'(t))$</p>
+<p><strong>曲面</strong> $F(x,y,z)=0$：法向量 $\vec{n} = (F_x, F_y, F_z)$</p>
+<hr class="section-divider">
+<h2 id="9-重积分">9. 重积分</h2>
+<h3 id="91-二重积分">9.1 二重积分</h3>
+<h4 id="计算方法">计算方法</h4>
+<p><strong>直角坐标</strong>（X 型：$a \leq x \leq b, \varphi_1(x) \leq y \leq \varphi_2(x)$）：</p>
+<p>$$\iint_D f(x,y)dxdy = \int_a^b dx \int_{\varphi_1(x)}^{\varphi_2(x)} f(x,y)dy$$</p>
+<p><strong>极坐标</strong>（$x = r\cos\theta, y = r\sin\theta, dxdy = r dr d\theta$）：</p>
+<p>$$\iint_D f(x,y)dxdy = \iint_D f(r\cos\theta, r\sin\theta) \cdot r dr d\theta$$</p>
+<p>适用场景：积分区域为圆/扇形，被积函数含 $x^2+y^2$</p>
+<p><strong>对称性</strong>：考虑区域关于 $x$ 轴、$y$ 轴对称时的奇偶性简化</p>
+<p><strong>交换积分次序</strong>：一种次序积不出来时交换（需画图重新确定上下限）</p>
+<h4 id="换元法">换元法</h4>
+<p>$$\iint_D f(x,y)dxdy = \iint_{D'} f[x(u,v), y(u,v)]\left|\frac{\partial(x,y)}{\partial(u,v)}\right|dudv$$</p>
+<h3 id="92-三重积分">9.2 三重积分</h3>
+<p><strong>直角坐标（投影法）</strong>：</p>
+<p>$$\iiint_\Omega f dV = \iint_{D_{xy}} dxdy \int_{z_1(x,y)}^{z_2(x,y)} f dz$$</p>
+<p><strong>柱坐标</strong>（$x = r\cos\theta, y = r\sin\theta, z = z, dV = r dr d\theta dz$）：适用于柱体或被积函数含 $x^2+y^2$</p>
+<p><strong>球坐标</strong>（$x = r\sin\varphi\cos\theta, y = r\sin\varphi\sin\theta, z = r\cos\varphi, dV = r^2\sin\varphi dr d\varphi d\theta$）：适用于球体或被积函数含 $x^2+y^2+z^2$</p>
+<h3 id="93-应用">9.3 应用</h3>
+<ul>
+<li>面积：$A = \iint_D d\sigma$</li>
+<li>体积：$V = \iiint_\Omega dV$</li>
+<li>曲面积：$S = \iint_D \sqrt{1 + z_x^2 + z_y^2} dxdy$</li>
+<li>质心：$\bar{x} = \frac{\iiint x\rho dV}{\iiint \rho dV}$</li>
+</ul>
+<hr class="section-divider">
+<h2 id="10-曲线积分与曲面积分">10. 曲线积分与曲面积分</h2>
+<h3 id="101-第一类曲线积分（对弧长）">10.1 第一类曲线积分（对弧长）</h3>
+<p>$$\int_L f(x,y)ds = \int_\alpha^\beta f[x(t),y(t)]\sqrt{[x'(t)]^2 + [y'(t)]^2}dt$$</p>
+<ul>
+<li><strong>与方向无关</strong></li>
+<li>物理意义：曲线质量</li>
+</ul>
+<h3 id="102-第二类曲线积分（对坐标）">10.2 第二类曲线积分（对坐标）</h3>
+<p>$$\int_L Pdx + Qdy = \int_\alpha^\beta [P(x(t),y(t))x'(t) + Q(x(t),y(t))y'(t)]dt$$</p>
+<p>物理意义：变力做功</p>
+<h4 id="Green-公式">Green 公式</h4>
+<p>$$\oint_L Pdx + Qdy = \iint_D \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)dxdy$$</p>
+<h4 id="积分与路径无关的等价条件（单连通域）">积分与路径无关的等价条件（单连通域）</h4>
+<ul>
+<li>$\int_L Pdx + Qdy$ 与路径无关</li>
+<li>$\oint_L Pdx + Qdy = 0$（任意闭曲线）</li>
+<li>$\dfrac{\partial P}{\partial y} = \dfrac{\partial Q}{\partial x}$</li>
+<li>$Pdx + Qdy$ 为全微分：$du = Pdx + Qdy$</li>
+</ul>
+<p><strong>求原函数</strong>（折线积分）：$u(x,y) = \int_{x_0}^x P(t,y_0)dt + \int_{y_0}^y Q(x,t)dt + C$</p>
+<h3 id="103-第一类曲面积分（对面积）">10.3 第一类曲面积分（对面积）</h3>
+<p>$$\iint_\Sigma f(x,y,z)dS = \iint_{D_{xy}} f[x,y,z(x,y)]\sqrt{1+z_x^2+z_y^2}dxdy$$</p>
+<h3 id="104-第二类曲面积分（对坐标）">10.4 第二类曲面积分（对坐标）</h3>
+<p>$$\iint_\Sigma Pdydz + Qdzdx + Rdxdy$$</p>
+<h4 id="Gauss-公式">Gauss 公式</h4>
+<p>$$\oiint_\Sigma Pdydz + Qdzdx + Rdxdy = \iiint_\Omega \left(\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}\right)dV$$</p>
+<p><strong>散度</strong>：$\text{div}\vec{F} = \frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}$</p>
+<h4 id="Stokes-公式">Stokes 公式</h4>
+<p>$$\oint_L Pdx + Qdy + Rdz = \iint_\Sigma \begin{vmatrix} dydz &amp; dzdx &amp; dxdy \\ \frac{\partial}{\partial x} &amp; \frac{\partial}{\partial y} &amp; \frac{\partial}{\partial z} \\ P &amp; Q &amp; R \end{vmatrix}$$</p>
+<p><strong>旋度</strong>：$\text{rot}\vec{F} = \nabla \times \vec{F}$</p>
+<hr class="section-divider">
+<h2 id="11-无穷级数">11. 无穷级数</h2>
+<h3 id="111-常数项级数">11.1 常数项级数</h3>
+<h4 id="收敛的必要条件">收敛的必要条件</h4>
+<p>$\lim_{n\to\infty} u_n = 0$（不满足则发散，满足不一定收敛）</p>
+<h4 id="重要级数的敛散性">重要级数的敛散性</h4>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th>级数</th>
+<th>收敛条件</th>
+<th>和</th>
+</tr></thead><tbody>
+<tr>
+<td>几何级数 $\sum aq^n$</td>
+<td>$\|q\|&lt;1$</td>
+<td>$\dfrac{a}{1-q}$</td>
+</tr>
+<tr>
+<td>$p$-级数 $\sum \dfrac{1}{n^p}$</td>
+<td>$p&gt;1$</td>
+<td>—</td>
+</tr>
+<tr>
+<td>调和级数 $\sum \dfrac{1}{n}$</td>
+<td>发散</td>
+<td>—</td>
+</tr>
+<tr>
+<td>$\sum \dfrac{1}{n(\ln n)^p}$</td>
+<td>$p&gt;1$</td>
+<td>—</td>
+</tr>
+</tbody></table></div>
+<h4 id="正项级数审敛法">正项级数审敛法</h4>
+<p><strong>比较判别法</strong>：与已知敛散性的级数比较（通常与 $p$-级数比较）</p>
+<p><strong>比值判别法（D'Alembert）</strong>：$\lim_{n\to\infty} \frac{u_{n+1}}{u_n} = \rho$</p>
+<ul>
+<li>$\rho &lt; 1$ 收敛，$\rho &gt; 1$ 发散，$\rho = 1$ 无法判断</li>
+</ul>
+<p><strong>根值判别法（Cauchy）</strong>：$\lim_{n\to\infty} \sqrt[n]{u_n} = \rho$</p>
+<ul>
+<li>同上</li>
+</ul>
+<p><strong>积分判别法</strong>：若 $f(x)$ 非负单调递减，$\sum f(n)$ 与 $\int_1^{+\infty} f(x)dx$ 同敛散</p>
+<h4 id="交错级数">交错级数</h4>
+<p><strong>Leibniz 判别法</strong>：$u_n$ 单调递减趋于 0 ⇒ $\sum (-1)^{n-1}u_n$ 收敛，且 $|r_n| \leq u_{n+1}$</p>
+<h4 id="绝对收敛与条件收敛">绝对收敛与条件收敛</h4>
+<ul>
+<li>绝对收敛：$\sum |u_n|$ 收敛 ⇒ $\sum u_n$ 收敛</li>
+<li>条件收敛：$\sum u_n$ 收敛但 $\sum |u_n|$ 发散</li>
+<li>绝对收敛级数可任意重排；条件收敛级数重排可得任意和</li>
+</ul>
+<h3 id="112-幂级数">11.2 幂级数</h3>
+<h4 id="收敛半径">收敛半径</h4>
+<p>$$\sum_{n=0}^{\infty} a_n (x-x_0)^n$$</p>
+<ul>
+<li>比值法：$R = \lim_{n\to\infty} \left|\dfrac{a_n}{a_{n+1}}\right|$</li>
+<li>根值法：$R = \dfrac{1}{\limsup_{n\to\infty}\sqrt[n]{|a_n|}}$</li>
+</ul>
+<p>端点 $x = x_0 \pm R$ 处需单独判断</p>
+<h4 id="幂级数的运算">幂级数的运算</h4>
+<p>在收敛区间内可以逐项求导和逐项积分，收敛半径不变。</p>
+<h3 id="113-函数展开为幂级数">11.3 函数展开为幂级数</h3>
+<h4 id="常用-Maclaurin-展开">常用 Maclaurin 展开</h4>
+<p>$$e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} \quad (-\infty &lt; x &lt; \infty)$$</p>
+<p>$$\sin x = \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n+1}}{(2n+1)!} \quad (-\infty &lt; x &lt; \infty)$$</p>
+<p>$$\cos x = \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n}}{(2n)!} \quad (-\infty &lt; x &lt; \infty)$$</p>
+<p>$$\frac{1}{1-x} = \sum_{n=0}^{\infty} x^n \quad (-1 &lt; x &lt; 1)$$</p>
+<p>$$\frac{1}{1+x} = \sum_{n=0}^{\infty} (-1)^n x^n \quad (-1 &lt; x &lt; 1)$$</p>
+<p>$$\ln(1+x) = \sum_{n=1}^{\infty} (-1)^{n-1} \frac{x^n}{n} \quad (-1 &lt; x \leq 1)$$</p>
+<p>$$\arctan x = \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n+1}}{2n+1} \quad (-1 \leq x \leq 1)$$</p>
+<p>$$(1+x)^\alpha = 1 + \sum_{n=1}^{\infty} \frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}x^n \quad (-1 &lt; x &lt; 1)$$</p>
+<h4 id="求幂级数和函数">求幂级数和函数</h4>
+<p>常见方法：引入变量构造 $S(x)$，利用逐项求导/积分得到闭合形式，再代值。</p>
+<h3 id="114-Fourier-级数">11.4 Fourier 级数</h3>
+<h4 id="周期-$2\pi$-的-Fourier-级数">周期 $2\pi$ 的 Fourier 级数</h4>
+<p>$$f(x) \sim \frac{a_0}{2} + \sum_{n=1}^{\infty} (a_n\cos nx + b_n\sin nx)$$</p>
+<p>$$a_n = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos nx dx, \quad b_n = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin nx dx$$</p>
+<h4 id="Dirichlet-收敛定理">Dirichlet 收敛定理</h4>
+<ul>
+<li>连续点：收敛于 $f(x)$</li>
+<li>间断点：收敛于 $\dfrac{f(x^-)+f(x^+)}{2}$</li>
+<li>端点 $\pm\pi$：收敛于 $\dfrac{f(-\pi^+)+f(\pi^-)}{2}$</li>
+</ul>
+<h4 id="正弦级数与余弦级数">正弦级数与余弦级数</h4>
+<ul>
+<li>奇延拓（正弦级数）：$a_n=0, b_n=\frac{2}{\pi}\int_0^\pi f(x)\sin nx dx$</li>
+<li>偶延拓（余弦级数）：$b_n=0, a_n=\frac{2}{\pi}\int_0^\pi f(x)\cos nx dx$</li>
+</ul>
+<h4 id="周期-$2l$-的情况">周期 $2l$ 的情况</h4>
+<p>变量代换 $t = \frac{\pi x}{l}$ 转化为周期 $2\pi$ 的情况。</p>
+<h4 id="Parseval-等式">Parseval 等式</h4>
+<p>$$\frac{1}{\pi}\int_{-\pi}^{\pi} f^2(x)dx = \frac{a_0^2}{2} + \sum_{n=1}^{\infty} (a_n^2 + b_n^2)$$</p>
+<hr class="section-divider">
+<h2 id="附录：竞赛应试技巧">附录：竞赛应试技巧</h2>
+<h3 id="极限计算思路">极限计算思路</h3>
+<ul>
+<li>先判断不定式类型</li>
+<li>乘除部分优先用等价无穷小代换</li>
+<li>复杂表达式优先考虑 Taylor 展开</li>
+<li>洛必达法则作为备选</li>
+<li>含幂指函数 $[f(x)]^{g(x)}$ 用 $e^{g\ln f}$ 转化</li>
+<li>$1^\infty$ 型用公式：$\lim f^g = e^{\lim g(f-1)}$</li>
+</ul>
+<h3 id="积分计算思路">积分计算思路</h3>
+<ul>
+<li>先观察对称性</li>
+<li>不定积分顺序：凑微分 → 换元 → 分部积分 → 有理函数分解</li>
+<li>定积分考虑倒代换、三角代换</li>
+</ul>
+<h3 id="证明题思路">证明题思路</h3>
+<ul>
+<li><strong>中值定理</strong>：构造辅助函数用 Rolle 定理</li>
+<li><strong>不等式</strong>：单调性、Lagrange 中值、Taylor 展开</li>
+<li><strong>方程根</strong>：零点定理 + Rolle 定理反证唯一性</li>
+<li><strong>积分不等式</strong>：积分估值、Cauchy-Schwarz 不等式</li>
+</ul>
+<h3 id="常用不等式">常用不等式</h3>
+<ul>
+<li><strong>Cauchy-Schwarz</strong>：$(\int fg)^2 \leq \int f^2 \int g^2$</li>
+<li>$|\sin x| \leq |x|$</li>
+<li>$\frac{2}{\pi}x \leq \sin x \leq x$（$x\in[0,\frac{\pi}{2}]$）</li>
+<li>$\ln(1+x) \leq x$（$x &gt; -1$）</li>
+<li>$e^x \geq 1 + x$</li>
+<li>均值不等式：$\sqrt{ab} \leq \frac{a+b}{2} \leq \sqrt{\frac{a^2+b^2}{2}}$</li>
+</ul>
+<hr class="section-divider">
+<p>*祝校赛顺利！*</p>
+  </main>
+</div>
+
+<a href="#top" class="back-to-top" id="backToTop" title="回到顶部">&uarr;</a>
+
+<script>
+renderMathInElement(document.body, {
+  delimiters: [
+    {left: '$$', right: '$$', display: true},
+    {left: '$', right: '$', display: false},
+  ],
+  strict: false,
+  throwOnError: false
+});
+
+const btn = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  btn.classList.toggle('visible', window.scrollY > 500);
+});
+</script>
+
+</body>
+</html>
