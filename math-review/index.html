@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>数学竞赛复习 —— 高等数学（除微分方程）</title>
+<title>数学竞赛复习 —— 高等数学（完整版）</title>
 
 <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
@@ -172,10 +172,10 @@
 
 <div class="layout">
   <aside class="sidebar">
-    <nav class="toc"><h3>目录</h3><ul><li><a href="#目录">目录</a></li><li><a href="#1-函数、极限与连续">1. 函数、极限与连续</a></li><li><a href="#2-导数与微分">2. 导数与微分</a></li><li><a href="#3-微分中值定理与导数的应用">3. 微分中值定理与导数的应用</a></li><li><a href="#4-不定积分">4. 不定积分</a></li><li><a href="#5-定积分">5. 定积分</a></li><li><a href="#6-定积分的应用">6. 定积分的应用</a></li><li><a href="#7-空间解析几何与向量代数">7. 空间解析几何与向量代数</a></li><li><a href="#8-多元函数微分学">8. 多元函数微分学</a></li><li><a href="#9-重积分">9. 重积分</a></li><li><a href="#10-曲线积分与曲面积分">10. 曲线积分与曲面积分</a></li><li><a href="#11-无穷级数">11. 无穷级数</a></li><li><a href="#附录：竞赛应试技巧">附录：竞赛应试技巧</a></li></ul></nav>
+    <nav class="toc"><h3>目录</h3><ul><li><a href="#目录">目录</a></li><li><a href="#1-函数、极限与连续">1. 函数、极限与连续</a></li><li><a href="#2-导数与微分">2. 导数与微分</a></li><li><a href="#3-微分中值定理与导数的应用">3. 微分中值定理与导数的应用</a></li><li><a href="#4-不定积分">4. 不定积分</a></li><li><a href="#5-定积分">5. 定积分</a></li><li><a href="#6-定积分的应用">6. 定积分的应用</a></li><li><a href="#7-空间解析几何与向量代数">7. 空间解析几何与向量代数</a></li><li><a href="#8-多元函数微分学">8. 多元函数微分学</a></li><li><a href="#9-重积分">9. 重积分</a></li><li><a href="#10-曲线积分与曲面积分">10. 曲线积分与曲面积分</a></li><li><a href="#11-无穷级数">11. 无穷级数</a></li><li><a href="#12-微分方程">12. 微分方程</a></li><li><a href="#附录：竞赛应试技巧">附录：竞赛应试技巧</a></li></ul></nav>
   </aside>
   <main class="content">
-<h1 id="top">大学生数学竞赛（校赛）复习指南 —— 高等数学（除微分方程）</h1>
+<h1 id="top">大学生数学竞赛（校赛）复习指南 —— 高等数学（完整版）</h1>
 <hr class="section-divider">
 <h2 id="目录">目录</h2>
 <ul>
@@ -190,6 +190,7 @@
 <li>[重积分](#9-重积分)</li>
 <li>[曲线积分与曲面积分](#10-曲线积分与曲面积分)</li>
 <li>[无穷级数](#11-无穷级数)</li>
+<li>[微分方程](#12-微分方程)</li>
 </ul>
 <hr class="section-divider">
 <h2 id="1-函数、极限与连续">1. 函数、极限与连续</h2>
@@ -1040,6 +1041,207 @@
 <p>变量代换 $t = \frac{\pi x}{l}$ 转化为周期 $2\pi$ 的情况。</p>
 <h4 id="Parseval-等式">Parseval 等式</h4>
 <p>$$\frac{1}{\pi}\int_{-\pi}^{\pi} f^2(x)dx = \frac{a_0^2}{2} + \sum_{n=1}^{\infty} (a_n^2 + b_n^2)$$</p>
+<hr class="section-divider">
+<h2 id="12-微分方程">12. 微分方程</h2>
+<h3 id="121-基本概念">12.1 基本概念</h3>
+<ul>
+<li><strong>微分方程</strong>：含有未知函数及其导数的方程</li>
+<li><strong>阶</strong>：方程中出现的最高阶导数的阶数</li>
+<li><strong>通解</strong>：含有与阶数相同个数的独立任意常数的解</li>
+<li><strong>特解</strong>：确定了通解中任意常数的解</li>
+<li><strong>初始条件</strong>：$y(x_0)=y_0, y'(x_0)=y_1, \ldots$</li>
+<li><strong>线性微分方程</strong>：未知函数及其各阶导数都是一次的</li>
+</ul>
+
+<h3 id="122-一阶微分方程">12.2 一阶微分方程</h3>
+
+<h4 id="可分离变量方程">一、可分离变量方程</h4>
+<p>$$\frac{dy}{dx} = f(x)g(y) \quad \Rightarrow \quad \int \frac{dy}{g(y)} = \int f(x)dx + C$$</p>
+<p>注意 $g(y)=0$ 可能给出奇解。</p>
+
+<h4 id="齐次方程">二、齐次方程</h4>
+<p>$$\frac{dy}{dx} = \varphi\left(\frac{y}{x}\right)$$</p>
+<p>解法：令 $u = \dfrac{y}{x}$，则 $y = ux$，$\dfrac{dy}{dx} = u + x\dfrac{du}{dx}$，代入化为可分离变量方程：</p>
+<p>$$x\frac{du}{dx} = \varphi(u) - u \quad \Rightarrow \quad \int \frac{du}{\varphi(u)-u} = \int \frac{dx}{x} + C$$</p>
+
+<h4 id="可化为齐次的方程">三、可化为齐次的方程</h4>
+<p>$$\frac{dy}{dx} = \frac{a_1x + b_1y + c_1}{a_2x + b_2y + c_2}$$</p>
+<ul>
+<li>若 $c_1 = c_2 = 0$，即齐次方程</li>
+<li>若 $\dfrac{a_1}{a_2} = \dfrac{b_1}{b_2} \neq \dfrac{c_1}{c_2}$：令 $u = a_1x + b_1y$ 化为可分离变量方程</li>
+<li>否则解出交点 $(\alpha, \beta)$，令 $X = x-\alpha, Y = y-\beta$ 化为齐次方程</li>
+</ul>
+
+<h4 id="一阶线性微分方程">四、一阶线性微分方程</h4>
+<p>标准形式：</p>
+<p>$$\frac{dy}{dx} + P(x)y = Q(x)$$</p>
+<p><strong>通解公式（必背！）</strong>：</p>
+<p>$$y = e^{-\int P(x)dx}\left[\int Q(x)e^{\int P(x)dx}dx + C\right]$$</p>
+<p>记忆口诀：先求齐次通解 $y = Ce^{-\int Pdx}$，再用常数变易法。</p>
+
+<h4 id="伯努利方程">五、伯努利方程</h4>
+<p>$$\frac{dy}{dx} + P(x)y = Q(x)y^n \quad (n \neq 0, 1)$$</p>
+<p>解法：令 $z = y^{1-n}$，则 $\dfrac{dz}{dx} = (1-n)y^{-n}\dfrac{dy}{dx}$，代入化为一阶线性方程：</p>
+<p>$$\frac{dz}{dx} + (1-n)P(x)z = (1-n)Q(x)$$</p>
+
+<h4 id="全微分方程">六、全微分方程（恰当方程）</h4>
+<p>$$P(x,y)dx + Q(x,y)dy = 0, \quad \text{满足 } \frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}$$</p>
+<p>解法（折线积分）：$u(x,y) = \int_{x_0}^x P(t, y_0)dt + \int_{y_0}^y Q(x, t)dt = C$</p>
+<p><strong>积分因子法</strong>：若 $\dfrac{\partial P}{\partial y} \neq \dfrac{\partial Q}{\partial x}$，可尝试乘以积分因子 $\mu(x,y)$：</p>
+<ul>
+<li>若 $\dfrac{1}{Q}\left(\dfrac{\partial P}{\partial y}-\dfrac{\partial Q}{\partial x}\right)$ 仅与 $x$ 有关：$\mu = e^{\int \frac{1}{Q}(P_y-Q_x)dx}$</li>
+<li>若 $\dfrac{1}{P}\left(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right)$ 仅与 $y$ 有关：$\mu = e^{\int \frac{1}{P}(Q_x-P_y)dy}$</li>
+</ul>
+
+<h3 id="123-可降阶的高阶方程">12.3 可降阶的高阶方程</h3>
+
+<h4 id="yn--fx">一、$y^{(n)} = f(x)$ 型</h4>
+<p>逐次积分 $n$ 次即可。</p>
+
+<h4 id="y--fxy">二、$y'' = f(x, y')$ 型（不显含 $y$）</h4>
+<p>令 $p = y'$，则 $y'' = p' = \dfrac{dp}{dx}$，化为一阶方程：</p>
+<p>$$\frac{dp}{dx} = f(x, p)$$</p>
+
+<h4 id="y--fyy">三、$y'' = f(y, y')$ 型（不显含 $x$）</h4>
+<p>令 $p = y'$，则 $y'' = p\dfrac{dp}{dy}$，化为一阶方程：</p>
+<p>$$p\frac{dp}{dy} = f(y, p)$$</p>
+
+<h3 id="124-高阶线性微分方程解的结构">12.4 高阶线性微分方程解的结构</h3>
+<h4 id="齐次线性方程">齐次线性方程</h4>
+<p>$$y^{(n)} + a_1(x)y^{(n-1)} + \cdots + a_n(x)y = 0$$</p>
+<ul>
+<li><strong>叠加原理</strong>：若 $y_1, y_2$ 是解，则 $C_1y_1 + C_2y_2$ 也是解</li>
+<li><strong>Wronsky 行列式</strong>：$W = \begin{vmatrix} y_1 & y_2 \\ y_1' & y_2' \end{vmatrix}$</li>
+<li><strong>线性相关</strong>：$W \equiv 0$；<strong>线性无关</strong>：$W \neq 0$（只要在某点不为零）</li>
+<li>$n$ 阶齐次方程通解含有 $n$ 个线性无关的特解</li>
+</ul>
+
+<h4 id="非齐次线性方程">非齐次线性方程</h4>
+<p>非齐次通解 = 齐次通解 + 非齐次特解</p>
+<ul>
+<li><strong>叠加原理</strong>：若 $y_1^*$ 对应 $f_1(x)$，$y_2^*$ 对应 $f_2(x)$，则 $y_1^*+y_2^*$ 对应 $f_1+f_2$</li>
+</ul>
+
+<h3 id="125-常系数线性微分方程（竞赛重点！）">12.5 常系数线性微分方程（竞赛重点！）</h3>
+
+<h4 id="二阶齐次">一、二阶常系数齐次方程 $y'' + py' + qy = 0$</h4>
+<p>特征方程：$r^2 + pr + q = 0$</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th>根的情况</th>
+<th>通解</th>
+</tr></thead><tbody>
+<tr>
+<td>$r_1 \neq r_2$（两实根）</td>
+<td>$y = C_1e^{r_1x} + C_2e^{r_2x}$</td>
+</tr>
+<tr>
+<td>$r_1 = r_2 = r$（重根）</td>
+<td>$y = (C_1 + C_2x)e^{rx}$</td>
+</tr>
+<tr>
+<td>$r = \alpha \pm i\beta$（共轭复根）</td>
+<td>$y = e^{\alpha x}(C_1\cos\beta x + C_2\sin\beta x)$</td>
+</tr>
+</tbody></table></div>
+
+<h4 id="n-阶齐次">二、$n$ 阶常系数齐次方程</h4>
+<p>特征方程 $r^n + a_1r^{n-1} + \cdots + a_n = 0$ 的根对应解：</p>
+<ul>
+<li>单实根 $r$：$Ce^{rx}$</li>
+<li>$k$ 重实根 $r$：$(C_1 + C_2x + \cdots + C_k x^{k-1})e^{rx}$</li>
+<li>单复根 $\alpha \pm i\beta$：$e^{\alpha x}(C_1\cos\beta x + C_2\sin\beta x)$</li>
+<li>$k$ 重复根 $\alpha \pm i\beta$：$e^{\alpha x}[(C_1 + \cdots + C_k x^{k-1})\cos\beta x + (D_1 + \cdots + D_k x^{k-1})\sin\beta x]$</li>
+</ul>
+
+<h4 id="非齐次-待定系数">三、二阶非齐次 $y'' + py' + qy = f(x)$</h4>
+
+<p><strong>类型一：$f(x) = P_m(x)e^{\lambda x}$</strong></p>
+<p>设特解 $y^* = x^k Q_m(x)e^{\lambda x}$，其中 $Q_m(x)$ 为 $m$ 次多项式，</p>
+<ul>
+<li>$k = 0$：$\lambda$ 不是特征根</li>
+<li>$k = 1$：$\lambda$ 是单特征根</li>
+<li>$k = 2$：$\lambda$ 是二重特征根（仅二阶）</li>
+</ul>
+
+<p><strong>类型二：$f(x) = e^{\lambda x}[P_l(x)\cos\omega x + P_m(x)\sin\omega x]$</strong></p>
+<p>设特解 $y^* = x^k e^{\lambda x}[R_n(x)\cos\omega x + S_n(x)\sin\omega x]$</p>
+<p>其中 $n = \max(l, m)$，</p>
+<ul>
+<li>$k = 0$：$\lambda \pm i\omega$ 不是特征根</li>
+<li>$k = 1$：$\lambda \pm i\omega$ 是特征根</li>
+</ul>
+
+<p><strong>常用结果速查</strong>：</p>
+<div class="table-wrapper"><table>
+<thead><tr>
+<th>$f(x)$</th>
+<th>特解形式</th>
+</tr></thead><tbody>
+<tr><td>$a$（常数）</td><td>$y^* = A$</td></tr>
+<tr><td>$ax+b$</td><td>$y^* = Ax+B$</td></tr>
+<tr><td>$ae^{\lambda x}$</td><td>$y^* = Ax^k e^{\lambda x}$，$k$ 取决于 $\lambda$ 是否特征根</td></tr>
+<tr><td>$a\cos\omega x$ 或 $a\sin\omega x$</td><td>$y^* = x^k(A\cos\omega x + B\sin\omega x)$</td></tr>
+<tr><td>$P(x)\cos\omega x$</td><td>$y^* = x^k[Q(x)\cos\omega x + R(x)\sin\omega x]$</td></tr>
+</tbody></table></div>
+
+<h4 id="常数变易法">四、常数变易法（通用方法）</h4>
+<p>已知齐次通解 $y_h = C_1y_1 + C_2y_2$，设非齐次特解 $y^* = v_1(x)y_1 + v_2(x)y_2$：</p>
+<p>$$\begin{cases} v_1'y_1 + v_2'y_2 = 0 \\ v_1'y_1' + v_2'y_2' = f(x) \end{cases}$$</p>
+<p>解得 $v_1' = -\dfrac{y_2 f}{W}$，$v_2' = \dfrac{y_1 f}{W}$，其中 $W = y_1y_2' - y_2y_1'$。</p>
+
+<h3 id="126-欧拉方程">12.6 欧拉方程</h3>
+<p>$$x^n y^{(n)} + a_1 x^{n-1} y^{(n-1)} + \cdots + a_n y = f(x)$$</p>
+<p>解法：令 $x = e^t$（或 $t = \ln|x|$），则：</p>
+<ul>
+<li>$xy' = Dy$，其中 $D = \dfrac{d}{dt}$</li>
+<li>$x^2y'' = D(D-1)y$</li>
+<li>$x^3y''' = D(D-1)(D-2)y$</li>
+</ul>
+<p>代回化为常系数线性方程求解。</p>
+<p>二阶 Euler 方程：$x^2y'' + pxy' + qy = f(x)$ 可令 $y = x^r$ 求齐次通解。</p>
+
+<h3 id="127-微分方程的应用">12.7 微分方程的应用</h3>
+
+<h4 id="几何应用">一、几何应用</h4>
+<ul>
+<li>切线/法线条件 → 一阶微分方程</li>
+<li>曲率条件 → 二阶微分方程</li>
+<li>曲线族方程 → 消去参数得微分方程</li>
+</ul>
+
+<h4 id="物理应用">二、物理应用</h4>
+<ul>
+<li><strong>牛顿冷却定律</strong>：$\dfrac{dT}{dt} = -k(T - T_0)$</li>
+<li><strong>放射性衰变</strong>：$\dfrac{dm}{dt} = -km$</li>
+<li><strong>人口增长（Logistic）</strong>：$\dfrac{dP}{dt} = kP(M-P)$</li>
+<li><strong>弹簧振动</strong>：$my'' + cy' + ky = F(t)$（二阶，特征根决定振动类型）</li>
+</ul>
+
+<h3 id="128-竞赛常见题型">12.8 竞赛常见题型</h3>
+
+<h4 id="题型一：一阶方程求解">题型一：一阶方程求解</h4>
+<p>识别方程类型 → 选择对应方法 → 计算通解 → 代入初始条件求特解</p>
+<p>关键：会判断齐次方程（含 $\frac{y}{x}$ 形式）、伯努利方程（含 $y^n$ 项）、全微分方程（检查 $P_y=Q_x$）。</p>
+
+<h4 id="题型二：常系数线性方程">题型二：常系数线性方程</h4>
+<p>求特征根 → 写出齐次通解 → 由 $f(x)$ 设特解形式 → 待定系数求特解 → 相加得通解</p>
+<p>注意：特解中 $x^k$ 的 $k$ 值取错是常见失分点！</p>
+
+<h4 id="题型三：构造微分方程证明恒等式">题型三：构造微分方程证明恒等式</h4>
+<p>求出函数满足的微分方程，解方程验证恒等式成立。</p>
+
+<h4 id="题型四：积分方程化为微分方程">题型四：积分方程化为微分方程</h4>
+<p>方程两边对 $x$ 求导，将积分方程化为微分方程求解，最后利用原方程确定任意常数。</p>
+
+<p><strong>常用特解设法的记忆技巧</strong>：</p>
+<ul>
+<li>看 $f(x)$ 的形式来确定特解形式</li>
+<li>先检查是否为常系数方程，是则用待定系数法</li>
+<li>如果 $f(x)$ 可拆分为几项之和，分别求特解后相加</li>
+<li>待定系数法中检查 $k$ 值（特征根重合次数），这步最易出错</li>
+</ul>
+
 <hr class="section-divider">
 <h2 id="附录：竞赛应试技巧">附录：竞赛应试技巧</h2>
 <h3 id="极限计算思路">极限计算思路</h3>
